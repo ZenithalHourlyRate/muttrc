@@ -28,3 +28,11 @@ export EDITOR=your favorite editor
 ```
 
 在设置了 `MAIL` 变量时，zsh 等 shell 会检查 `MAILCHECK` 的环境变量，以检查 `MAIL` 是否改动，若有改动，会在终端中提醒 `You have new mail.`
+
+### 一些假设
+
+我们会在配置文件中硬编码一些环境变量，所以我们作出以下假设，这些假设在所有配置中起作用。若您的部署与我不同，请在相应文件夹中找到相应字符串进行更改。
+
+```bash
+export MAIL=~/M/
+```
