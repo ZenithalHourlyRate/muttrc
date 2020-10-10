@@ -1,0 +1,33 @@
+# Minimal Configuration of Mutt under the condition
+# of https://github.com/ZenithalHourlyRate/muttrc
+
+# For index
+set sort = threads
+
+# For compose
+set autoedit # skip editing headers when compose mail
+set reverse_name # reply with received email
+set include = yes # include the original mail in reply
+set forward_quote = yes # forward message would be quoted
+
+# For pager
+ignore * #ignore all headers first
+# then unignore what we wanted
+unignore From Message-ID Date To Cc Bcc Subject mail-followup-to \
+    x-mailer x-url x-operating-system
+set pager_stop # when pageup/pagedown, stop at begin/end of the mail
+
+# Misc
+set mbox_type = Maildir # in accordance with getmail
+
+# All folders
+set folder = "~/M/" # a global variable, used in mailboxes below
+# a hook, when enter that folder, execute the selected conf
+folder-hook "~/M/foo*" 'source ~/.mutt/muttrc.d/foo'
+source ~/.mutt/muttrc.d/foo # This is used as default behavior
+
+# list all mailboxes, can be shown in sidebar
+mailboxes "+foo/" "+foo/archive" "+foo/sent" "+foo/drafts" "+foo/trash"
+
+# Other config
+source ~/.mutt/muttrc.sidebar

@@ -1,0 +1,24 @@
+# Minimal conf of mutt under the condition of
+# https://github.com/ZenithalHourlyRate/muttrc
+set realname = "Foo"
+set from = "example@example.com"
+
+unmy_hdr Bcc # since we may switch from other conf to here, we must unset it first
+# Add my header Bcc automatically
+# All outgoing mail would be in INBOX, such that the reply can follow the thread
+# Even we have one outgoing email in sent, it is not enough
+my_hdr Bcc: "example@example.com"
+
+set sendmail = "/usr/bin/sendmail -a foo" # cooperate with sendmail, the name foo is configured in sendmail
+
+set spoolfile = "+foo/" # INBOX
+set mbox = "+foo/archive" # Processed emails would lie here
+set record = "+foo/sent" # sent emails
+set postponed = "+foo/drafts" # composing emails
+set trash = "+foo/trash" # deleted emails
+
+# With this two keybind you can easily move **tagged** 
+# emails into archive/INBOX
+# Currently disabled
+#macro index A "<tag-prefix-cond><save-message>+foo/archive<enter>" "Archive tagged mail"
+#macro index I "<tag-prefix-cond><save-message>+foo/<enter>" "Move message to INBOX"
