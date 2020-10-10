@@ -1,0 +1,23 @@
+set realname = "bar"
+set from = "bar@example.com"
+unmy_hdr Bcc
+my_hdr Bcc: bar@example.com
+unalternates *
+alternates ^bar@cmu.edu$ # alternative addr for this account
+unsubscribe *
+subscribe ^events@cmu.edu$ # subscribed mailing lists
+unlists *
+lists ^announce@mit.edu$ # known mailing lists(may be unsubscribed)
+
+set sendmail = "/usr/bin/msmtp -a bar"
+
+set spoolfile = "+bar/"
+set mbox = "+bar/archive"
+set record = "+bar/sent"
+set postponed = "+bar/drafts"
+set trash = "+bar/trash"
+
+set signature = "~/.mutt/signature/bar"
+
+macro index,pager A "<tag-prefix-cond><save-message>+bar/archive<enter>" "Archive tagged mail"
+macro index,pager I "<tag-prefix-cond><save-message>+bar/<enter>" "Move message to INBOX"

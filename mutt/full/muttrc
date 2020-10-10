@@ -1,0 +1,57 @@
+set editor = "vim"
+
+# For index
+set sort = threads
+set delete = yes
+set confirmappend = no
+set indent_string = "> "
+set read_inc=10
+set write_inc=10
+
+# For compose
+set reply_to = yes
+set autoedit
+set fcc_attach
+set reverse_name
+set copy = yes
+set include = yes
+set forward_quote = yes
+
+# For pager
+ignore *
+unignore From Message-ID Date To Cc Bcc Subject mail-followup-to \
+    x-mailer x-url x-operating-system
+my_hdr X-Operating-System: `uname -a`
+my_hdr X-Mailer: `mutt -v | head -1`
+set pager_stop
+alternative_order multipart/mixed multipart/related text/plain
+mime_lookup application/octet-stream
+
+# Misc
+set recall
+set mbox_type = Maildir
+set timeout = 30
+set tmpdir = ~/T
+
+# GnuPG bootstrap
+source ~/.mutt/gpg.rc
+
+# All folders
+set folder = "~/M/"
+folder-hook "~/M/foo*" 'source ~/.mutt/muttrc.d/foo'
+folder-hook "~/M/bar*" 'source ~/.mutt/muttrc.d/bar'
+source ~/.mutt/muttrc.d/foo # This is used as default behavior
+
+mailboxes "+foo/" "+foo/archive" "+foo/sent" "+foo/drafts" "+foo/trash"
+mailboxes "+bar/" "+bar/archive" "+bar/sent" "+bar/drafts" "+bar/trash"
+
+# Other config
+source ~/.mutt/muttrc.sidebar
+source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
+source ~/.mutt/muttrc.alias
+source ~/.mutt/muttrc.keybind
+
+set mailcap_path = ~/.mutt/mailcap 
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+auto_view application/pdf
