@@ -17,7 +17,7 @@ password = password
 
 [destination]
 type = Maildir
-path = ~/M/bar/
+path = ~/M/foo/
 
 [options]
 read_all = False
@@ -28,9 +28,28 @@ verbose = 0
 
 retriever 负责连接邮件服务器，其参数请查询您的邮件服务商的相应参数，尤其是 type 与 server。用户名与密码有特殊需求，请参考后面的描述。
 
-destination 描述取得的邮件的储存位置。我们已经假设了我们的邮件文件夹为 `~/M`，由于我们有多个账户，我们不可能将全部储存在一个文件夹中，于是我们在 `~/M` 中建立文件夹 `bar` （请您自己取自己喜欢的名字），将所取文件储存在此。
+destination 描述取得的邮件的储存位置。我们已经假设了我们的邮件文件夹为 `~/M`，由于我们有多个账户，我们不可能将全部储存在一个文件夹中，于是我们在 `~/M` 中建立文件夹 `foo` （请您自己取自己喜欢的名字），将所取文件储存在此。
 
 options 中，这里记录了是否每次全量更新，以及啰嗦程度等，其他选项请参考手册。
+
+## 实际运行与定时任务
+
+当写好一个配置文件 `~/.getmail/foo` 时，可以通过
+```bash
+getmail -v --rcfile foo
+```
+来测试是否成功。
+
+如果有多个配置文件，对应多个帐号，可以在一行命令中做到
+```bash
+getmail --rcfile foo --rcfile bar
+```
+
+之后可以将之放到 crontab 中
+```crontab
+*/10 * * * * /usr/bin/getmail --rcfile foo --rcfile bar
+```
+该 crontab 表示每10分钟执行一次，您可以更改为您所需要的参数。
 
 ## 用户密码相关
 
