@@ -34,6 +34,10 @@ set timeout = 30
 set tmpdir = ~/T
 set rfc2047_parameters=yes
 
+# Forward
+set mime_forward = yes
+set mime_forward_rest = yes
+
 # GnuPG bootstrap
 source ~/.mutt/gpg.rc
 
