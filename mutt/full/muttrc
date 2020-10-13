@@ -32,6 +32,7 @@ set recall
 set mbox_type = Maildir
 set timeout = 30
 set tmpdir = ~/T
+set rfc2047_parameters=yes
 
 # GnuPG bootstrap
 source ~/.mutt/gpg.rc
