@@ -33,6 +33,7 @@ set mbox_type = Maildir
 set timeout = 30
 set tmpdir = ~/T
 set rfc2047_parameters=yes
+set pipe_decode = yes
 
 # Forward
 set mime_forward = yes
