@@ -19,7 +19,7 @@ set forward_quote = yes
 
 # For pager
 ignore *
-unignore From Message-ID Date To Cc Bcc Subject mail-followup-to \
+unignore Sender From Message-ID Date To Cc Bcc Subject mail-followup-to \
     x-mailer x-url x-operating-system
 my_hdr X-Operating-System: `uname -a`
 my_hdr X-Mailer: `mutt -v | head -1`

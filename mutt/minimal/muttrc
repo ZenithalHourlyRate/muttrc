@@ -13,7 +13,7 @@ set forward_quote = yes # forward message would be quoted
 # For pager
 ignore * #ignore all headers first
 # then unignore what we wanted
-unignore From Message-ID Date To Cc Bcc Subject mail-followup-to \
+unignore Sender From Message-ID Date To Cc Bcc Subject mail-followup-to \
     x-mailer x-url x-operating-system
 set pager_stop # when pageup/pagedown, stop at begin/end of the mail
 
