@@ -54,6 +54,7 @@ mailboxes "+bar/" "+bar/archive" "+bar/sent" "+bar/drafts" "+bar/trash"
 # Other config
 source ~/.mutt/muttrc.sidebar
 source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
+set alias_file = ~/.mutt/muttrc.alias
 source ~/.mutt/muttrc.alias
 source ~/.mutt/muttrc.keybind
 
