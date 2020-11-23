@@ -62,3 +62,5 @@ set mailcap_path = ~/.mutt/mailcap
 auto_view text/html
 alternative_order text/plain text/enriched text/html
 auto_view application/pdf
+auto_view application/zip
+auto_view application/x-rar

@@ -13,3 +13,5 @@ image/*;  feh %s; test=test -n "$DISPLAY";
 audio/*; mpv %s; test=test -n "$DISPLAY"; 
 video/*; mpv %s; test=test -n "$DISPLAY"; 
 #application/pgp-keys; pgp -f < %s ; copiousoutput
+application/zip; unzip -l %s; copiousoutput;
+application/x-rar; unrar l %s; copiousoutput;
