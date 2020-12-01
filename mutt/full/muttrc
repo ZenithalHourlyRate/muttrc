@@ -43,13 +43,13 @@ set mime_forward_rest = yes
 source ~/.mutt/gpg.rc
 
 # All folders
-set folder = "~/M/"
+set folder = "~/M"
 folder-hook "~/M/foo*" 'source ~/.mutt/muttrc.d/foo'
 folder-hook "~/M/bar*" 'source ~/.mutt/muttrc.d/bar'
 source ~/.mutt/muttrc.d/foo # This is used as default behavior
 
-mailboxes "+foo/" "+foo/archive" "+foo/sent" "+foo/drafts" "+foo/trash"
-mailboxes "+bar/" "+bar/archive" "+bar/sent" "+bar/drafts" "+bar/trash"
+mailboxes "+foo" "+foo/archive" "+foo/sent" "+foo/drafts" "+foo/trash"
+mailboxes "+bar" "+bar/archive" "+bar/sent" "+bar/drafts" "+bar/trash"
 
 # Other config
 source ~/.mutt/muttrc.sidebar

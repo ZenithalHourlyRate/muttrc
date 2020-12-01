@@ -21,13 +21,14 @@ set pager_stop # when pageup/pagedown, stop at begin/end of the mail
 set mbox_type = Maildir # in accordance with getmail
 
 # All folders
-set folder = "~/M/" # a global variable, used in mailboxes below
+# No slash in the end as suggested by wiki
+set folder = "~/M" # a global variable, used in mailboxes below
 # a hook, when enter that folder, execute the selected conf
 folder-hook "~/M/foo*" 'source ~/.mutt/muttrc.d/foo'
 source ~/.mutt/muttrc.d/foo # This is used as default behavior
 
 # list all mailboxes, can be shown in sidebar
-mailboxes "+foo/" "+foo/archive" "+foo/sent" "+foo/drafts" "+foo/trash"
+mailboxes "+foo" "+foo/archive" "+foo/sent" "+foo/drafts" "+foo/trash"
 
 # Other config
 source ~/.mutt/muttrc.sidebar
