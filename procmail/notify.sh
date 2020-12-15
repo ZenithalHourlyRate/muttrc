@@ -17,4 +17,4 @@ from=${from:0:75}
 
 # notice: change to correct dbus session address!
 DBUS_SESSION_BUS_ADDRESS='unix:path=/run/user/1000/bus' \
-/usr/bin/notify-send -u normal -t 0 "$1: $sub" "$from"
+/usr/bin/notify-send -u normal -t 0 "$1: $sub" "|$from"
