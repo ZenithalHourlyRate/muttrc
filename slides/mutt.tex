@@ -1,0 +1,202 @@
+\documentclass{ctexbeamer}
+
+\usetheme{Madrid}
+\beamertemplatenavigationsymbolsempty
+
+%\usecolortheme{beaver}
+% the following colors are modified from beaver
+\definecolor{tuna}{rgb}{0.098,0.51,0.996}
+\definecolor{thu}{rgb}{0.50,0.36,0.71}
+
+\setbeamercolor{section in toc}{fg=black,bg=white}
+\setbeamercolor{item}{fg=tuna,bg=white}
+\setbeamercolor{alerted text}{fg=tuna!80!gray}
+\setbeamercolor*{palette primary}{fg=tuna!60!black,bg=gray!30!white}
+\setbeamercolor*{palette secondary}{fg=tuna!70!black,bg=gray!15!white}
+\setbeamercolor*{palette tertiary}{bg=tuna!80!black,fg=gray!10!white}
+\setbeamercolor*{palette quaternary}{fg=tuna,bg=gray!5!white}
+
+\setbeamercolor*{sidebar}{fg=tuna,bg=gray!15!white}
+
+\setbeamercolor*{palette sidebar primary}{fg=tuna!10!black}
+\setbeamercolor*{palette sidebar secondary}{fg=white}
+\setbeamercolor*{palette sidebar tertiary}{fg=tuna!50!black}
+\setbeamercolor*{palette sidebar quaternary}{fg=gray!10!white}
+
+%\setbeamercolor*{titlelike}{parent=palette primary}
+\setbeamercolor{titlelike}{parent=palette primary,fg=tuna}
+\setbeamercolor{frametitle}{bg=gray!10!white}
+\setbeamercolor{frametitle right}{bg=gray!60!white}
+
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+\setbeamertemplate{sections/subsections in toc}[square]
+\setbeamertemplate{items}[square]
+ 
+\usepackage{hyperref}
+
+\newcommand{\T}[1]{\texttt{#1}}
+
+\title{Mutt配置：一种实践的部署方式}
+\author[Zenithal（则尼梭）]{Zenithal（则尼梭）\newline\url{i@zenithal.me}}
+\date{2020-11-21}
+
+\begin{document}
+
+\begin{frame}
+\maketitle
+\end{frame}
+
+\section{关于我}
+\begin{frame}{关于我}
+  \begin{itemize}
+    \item 关于我\begin{itemize}
+        \item 你清普通同学
+        \item \url{https://github.com/ZenithalHourlyRate}
+        \item PGP 公钥：\url{https://blog.zenithal.me/key}
+        \item 有一个私有频道%，\T{AAAAAFk2Y-K5-0vHbiI8wg} （不会在群里放直接可以点的链接的）
+        \item 有一个公有频道，但是被群友阻止发出来了%，请在我的用户名后面加上频道
+        \item 尝试 Mutt 尝试了三回，终于在最后一回用了一个周末把事情搞定了
+      \end{itemize}
+    \item 在金枪鱼中\begin{itemize}
+        \item 潜水摸鱼两三年
+        %\item 上周公费旅游（别的人没有空罢了），负责发贴纸
+        %\item 最近可能出现在一些邮件中
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{为什么选用 Mutt}
+\begin{frame}{为什么选用 Mutt}
+  \begin{itemize}
+    \item 天下苦邮件旧矣\begin{itemize}
+        \item 某猫40GiB邮件\qquad\includegraphics[height=3\fontcharht\font`\B]{felix.jpg}
+        \item Webmail 功能不够用啊！
+        \item 邮件客户端卡死了/漏内存啊！
+        \item 各种诡异的需求满足不了啊！
+      \end{itemize}
+    \item 所有的邮件客户端坏坏，这个只是坏得少一些 --- Mutt 作者\footnote{
+        \textit{All mail clients suck. This one just sucks less.} - Author of Mutt, circa 1995}
+    \item 如果您很难向我发送加密的消息，请使用 Mutt --- 埃里克·雷蒙
+      \footnote{\textit{If your mailer makes this(use GPG encryption when sending me messages) difficult, consider switching to Mutt.} - Eric. S. Raymond}
+    \item $\backslash$壳/$\backslash$管道/$\backslash$退/
+      \footnote{$\backslash$SHELL/$\backslash$PIPE/$\backslash$TUI/}
+    \item 不要贵！不要老鼠！
+      \footnote{GUI and mouse}
+    \item 脚本！一行解决！（特指CLI）
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mutt 的高亮}
+  \begin{itemize}
+    \item Mutt 做了什么？它只是一个邮件客户端\begin{itemize}
+        \item 读取邮件
+        \item 构造邮件
+    \end{itemize}
+    \item 读取邮件\begin{itemize}
+        \item 本地 \T{Maildir/mbox}\begin{itemize}
+          \item 于是可以 \T{procmail} 进行奇怪处理
+          \item 也可以在文件系统上做坏事，比如 FUSE 与 s3
+        \end{itemize}
+        \item \T{IMAP/POP3}（最近加入了\T{XOAUTH2}）
+        \item 正则搜索（最近加入了搜索模式提醒，确实太难背了）
+        \item 解密与验证签名
+        \item 邮件头/邮件体缓存
+        \item 按照线程排序
+    \end{itemize}
+    \item 构造邮件\begin{itemize}
+      \item 自定义邮件头
+      \item 控制MIME的一些细节（比如发HTML邮件需要控制 Content-Type）
+      \item 调用外部编辑器（比 webmail 那个 textarea 高到不知道哪里去了）
+      \item 签名与加密
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{激动人心的展示环节！}
+\begin{frame}{一些基本概念}
+  \begin{itemize}
+    \item 茵蒂克丝（index）窗口\begin{itemize}
+        \item 一进入 Mutt 就看到的，展示所有邮件的简略信息
+        \item 简略信息的格式可以调节
+      \end{itemize}
+    \item 页面（pager）窗口\begin{itemize}
+        \item 用来浏览邮件内容
+        \item 可以根据 mailcap 对邮件内容进行浏览（渲染html与pdf无压力！）
+      \end{itemize}
+    \item 写作（compose）窗口\begin{itemize}
+        \item 对邮件的元信息进行调节
+        \item 其余写作任务不是 Mutt 管的
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{我的架构}
+  \begin{itemize}
+    \item 用 getmail6 收邮件到 Maildir 中
+    \item 用 Mutt 读取该 Maildir，做出一些包括归档的操作
+    \item 用 msmtp 发邮件，部分帐号配置了 DKIM 
+    \item 其他同学用 Mutt 内嵌的 IMAP/SMTP 支持也可，不过不在讨论范围内
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{账户相关配置}
+  \begin{itemize}
+    \item 将 getmail6 与 msmtp 配置好\begin{itemize}
+      \item QQ邮箱的独立密码
+      \item Gmail的「允许较不安全应用」以及独立密码
+      \item StartTLS
+    \end{itemize}
+    \item 或者不配置，先下载样例 Maildir 从\url{https://blog.zenithal.me/mail.tgz}
+    \item 账户相关的配置放在 \T{\~{}/.mutt/muttrc.d/} 中
+    \item 设置文件夹
+    \item 设置名字与邮箱
+    \item 设置签名
+    \item 其余账户相关配置
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{账户无关配置}
+  \begin{itemize}
+    \item 账户无关的配置放在 \T{\~{}/.mutt/muttrc} 中
+    \item 邮件头看哪些？
+    \item 奇妙奇妙的选项，请参照 Manual\begin{itemize}
+        \item 按线程排序
+        \item 可以去\url{https://github.com/ZenithalHourlyRate/muttrc}获取一份我用的配置
+    \end{itemize}
+    \item 颜色，按键绑定，别名
+  \end{itemize}
+\end{frame}
+
+\section{需求们}
+\begin{frame}{多账户相关配置}
+  \begin{itemize}
+    \item folder-hook
+    \item account-hook for IMAP user
+    \item sidebar 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Mailcap}
+  \begin{itemize}
+    \item 上古神器！
+    \item 扩展名太多打开不过来？
+    \item autoview
+    \item PDF/WORD
+    \item 压缩文件
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{GnuPG}
+  \begin{itemize}
+    \item 中古神器！
+    \item gpg-agent 是重头戏
+    \item 直接copy paste Mutt提供的gpg.rc，配一下signing key和默认gpg选项。
+  \end{itemize}
+\end{frame}
+
+
+\end{document}
+
+% vim: nospell
