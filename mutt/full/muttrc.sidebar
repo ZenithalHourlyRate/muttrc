@@ -27,7 +27,7 @@ set sidebar_indent_string = '  '
 
 # Make the Sidebar only display mailboxes that contain new, or flagged,
 # mail.
-set sidebar_new_mail_only = no
+set sidebar_new_mail_only = yes
 
 # Any mailboxes that are whitelisted will always be visible, even if the
 # sidebar_new_mail_only option is enabled.

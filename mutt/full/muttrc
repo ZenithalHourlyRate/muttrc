@@ -32,8 +32,9 @@ set recall
 set mbox_type = Maildir
 set timeout = 30
 set tmpdir = ~/T
-set rfc2047_parameters=yes
+set rfc2047_parameters = yes
 set pipe_decode = yes
+set imap_check_subscribed = yes
 
 # Forward
 set mime_forward = yes
