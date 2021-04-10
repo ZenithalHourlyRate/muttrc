@@ -12,11 +12,17 @@ bind index,pager <down> sidebar-next
 bind index,pager <up> sidebar-prev
 bind index,pager <right> sidebar-open
 
-bind index,pager @ compose-to-sender
 bind index,pager R group-reply
-bind index,pager D purge-message
 bind index <tab> sync-mailbox
 bind index <space> collapse-thread
 
 macro index,pager ~ "!getmail --rcfile foo<enter>" \
     "Poll INBOX"
+
+macro index,pager D "<tag-prefix-cond><purge-message><enter>" "Purge tagged message"
+
+macro pager ,@wrapon "<enter-command> set wrap=80; macro pager w ,@wrapof 'Toggle Wrap'<enter><exit><display-message><enter-command> set ?wrap<enter>"
+# why not wrapoff? length is limited for macro name!
+macro pager ,@wrapof "<enter-command> set wrap=0; macro pager w ,@wrapon 'Toggle Wrap'<enter><exit><display-message><enter-command> set ?wrap<enter>"
+macro pager w ,@wrapon 'Toggle Wrap'
+

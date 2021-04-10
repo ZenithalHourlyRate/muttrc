@@ -23,9 +23,10 @@ unignore Sender From Message-ID Date To Cc Bcc Subject mail-followup-to \
     x-mailer x-url x-operating-system
 my_hdr X-Operating-System: `uname -a`
 my_hdr X-Mailer: `mutt -v | head -1`
-set pager_stop
 alternative_order multipart/mixed multipart/related text/plain
 mime_lookup application/octet-stream
+set pager_stop
+set pager_context = 3
 
 # Misc
 set recall
@@ -37,7 +38,7 @@ set pipe_decode = yes
 set imap_check_subscribed = yes
 
 # Forward
-set mime_forward = yes
+# set mime_forward = yes
 set mime_forward_rest = yes
 
 # GnuPG bootstrap
