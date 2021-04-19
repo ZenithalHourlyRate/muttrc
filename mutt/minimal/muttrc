@@ -3,6 +3,7 @@
 
 # For index
 set sort = threads
+set sort_aux = last-date-received
 
 # For compose
 set autoedit # skip editing headers when compose mail

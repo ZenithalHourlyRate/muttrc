@@ -2,6 +2,7 @@ set editor = "vim"
 
 # For index
 set sort = threads
+set sort_aux = last-date-received
 set delete = yes
 set confirmappend = no
 set indent_string = "> "
