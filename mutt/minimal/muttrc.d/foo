@@ -4,10 +4,13 @@ set realname = "Foo"
 set from = "example@example.com"
 
 unmy_hdr Bcc # since we may switch from other conf to here, we must unset it first
+unmy_hdr Reply-To # since we may switch from other conf to here, we must unset it first
 # Add my header Bcc automatically
 # All outgoing mail would be in INBOX, such that the reply can follow the thread
 # Even we have one outgoing email in sent, it is not enough
 my_hdr Bcc: "example@example.com"
+# in some cases we want the receiver to send to another address
+my_hdr Reply-To: "example@example.org"
 
 set sendmail = "/usr/bin/sendmail -a foo" # cooperate with sendmail, the name foo is configured in sendmail
 

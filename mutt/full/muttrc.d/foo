@@ -1,7 +1,9 @@
 set realname = "Foo"
 set from = "foo@example.com"
 unmy_hdr Bcc
+unmy_hdr Reply-To
 my_hdr Bcc: foo@example.com
+my_hdr Reply-To: foo@example.org
 unalternates *
 alternates ^foo@mit.edu$ # alternative addr for this account
 unsubscribe *

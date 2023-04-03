@@ -1,6 +1,7 @@
 set realname = "bar"
 set from = "bar@example.com"
 unmy_hdr Bcc
+unmy_hdr Reply-To
 my_hdr Bcc: bar@example.com
 unalternates *
 alternates ^bar@cmu.edu$ # alternative addr for this account
